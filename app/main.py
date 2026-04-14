@@ -9,7 +9,7 @@ from app.llm_notes_gen import generate_notes
 
 app = FastAPI()
 
-# 👇 Add this CORS configuration 👇
+#  CORS configuration 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allows all origins (for development)
@@ -17,7 +17,7 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all methods (GET, POST, OPTIONS, etc.)
     allow_headers=["*"],  # Allows all headers
 )
-# 👆 End CORS configuration 👆
+
 
 
 VIDEO_DIR = "app/data/videos"
@@ -80,7 +80,7 @@ async def process_video(filename: str):
         raise HTTPException(status_code=500, detail=f"Processing error: {str(e)}")
 
     finally:
-        # ✅ Always cleanup audio
+        # cleanup audio
         if os.path.exists(audio_path):
             os.remove(audio_path)
         if os.path.exists(video_path):
